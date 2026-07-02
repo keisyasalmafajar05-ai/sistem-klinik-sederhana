@@ -1,109 +1,55 @@
-<?php
-session_start();
-include "koneksi.php";
-
-if(isset($_POST['login'])){
-
-    $username=$_POST['username'];
-    $password=$_POST['password'];
-
-    $query=mysqli_query($conn,"SELECT * FROM users
-    WHERE username='$username'
-    AND password='$password'");
-
-    if(mysqli_num_rows($query)>0){
-
-        $data=mysqli_fetch_assoc($query);
-
-        $_SESSION['nama']=$data['nama'];
-        $_SESSION['role']=$data['role'];
-
-        header("Location: dashboard.php");
-        exit;
-
-    }else{
-
-        echo "<script>
-        alert('Username atau Password Salah');
-        </script>";
-
-    }
-
-}
-?>
-
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-
-<title>Login SIBIMA</title>
-
-<style>
-
-body{
-font-family:Arial;
-background:#dbeafe;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-}
-
-.login{
-
-width:350px;
-background:white;
-padding:30px;
-border-radius:10px;
-box-shadow:0px 0px 10px gray;
-
-}
-
-input{
-
-width:100%;
-padding:10px;
-margin-top:10px;
-margin-bottom:15px;
-
-}
-
-button{
-
-width:100%;
-padding:10px;
-background:#2563eb;
-color:white;
-border:none;
-
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Klinik</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #eaf4ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .card {
+            width: 100%;
+            max-width: 420px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,.15);
+        }
+        .btn-primary {
+            background: #1976D2;
+            border: none;
+        }
+    </style>
 </head>
-
 <body>
+    <div class="card p-4">
+        <h2 class="text-center mb-4">🏥 Klinik Sehat</h2>
 
-<div class="login">
+        <?php if (session()->getFlashdata('error')): ?>
+            <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
+        <?php endif; ?>
 
-<h2 align="center">SIBIMA</h2>
+        <?php if (session()->getFlashdata('success')): ?>
+            <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
+        <?php endif; ?>
 
-<form method="POST">
-
-Username
-
-<input type="text" name="username" required>
-
-Password
-
-<input type="password" name="password" required>
-
-<button name="login">Login</button>
-
-</form>
-
-</div>
-
+        <form action="<?= base_url('admin/login') ?>" method="post">
+            <?= csrf_field() ?>
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input type="text" name="username" value="<?= old('username') ?>" class="form-control" required autofocus>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+    </div>
 </body>
-
 </html>
