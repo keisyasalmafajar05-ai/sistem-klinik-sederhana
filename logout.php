@@ -1,11 +1,18 @@
 <?php
 
-session_start();
+namespace App\Controllers;
 
-session_destroy();
+class Logout extends BaseController
+{
+    /**
+     * Menghapus session login dan mengarahkan kembali ke halaman login.
+     */
+    public function index()
+    {
+        // Hapus semua data session
+        session()->destroy();
 
-header("Location: login.php");
-
-exit;
-
-?>
+        // Arahkan ke halaman login dengan pesan sukses
+        return redirect()->to('/login')->with('success', 'Anda berhasil logout.');
+    }
+}
