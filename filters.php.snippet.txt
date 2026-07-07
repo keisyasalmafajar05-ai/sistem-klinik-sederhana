@@ -1,0 +1,24 @@
+CARA PASANG FILTER "auth"
+==========================
+Buka file app/Config/Filters.php bawaan CodeIgniter 4, lalu lakukan 2 perubahan berikut:
+
+1) Di dalam property $aliases, tambahkan baris:
+
+    'auth' => \App\Filters\AuthFilter::class,
+
+   Contoh setelah diedit:
+
+    public array $aliases = [
+        'csrf'          => \CodeIgniter\Filters\CSRF::class,
+        'toolbar'       => \CodeIgniter\Filters\DebugToolbar::class,
+        'honeypot'      => \CodeIgniter\Filters\Honeypot::class,
+        'invalidchars'  => \CodeIgniter\Filters\InvalidChars::class,
+        'secureheaders' => \CodeIgniter\Filters\SecureHeaders::class,
+        'auth'          => \App\Filters\AuthFilter::class,
+    ];
+
+2) Filter "auth" sudah otomatis diterapkan ke group route 'admin' lewat Routes.php
+   (lihat $routes->group('admin', ['filter' => 'auth'], ...)), jadi tidak perlu
+   didaftarkan lagi di $globals atau $methods.
+
+Tidak ada perubahan lain yang diperlukan di Filters.php.
