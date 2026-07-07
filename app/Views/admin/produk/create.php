@@ -6,6 +6,16 @@
         <form action="<?= base_url('admin/produk/store') ?>" method="post" enctype="multipart/form-data">
             <?= csrf_field() ?>
 
+            <?php if (session()->getFlashdata('errors')): ?>
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        <?php foreach (session()->getFlashdata('errors') as $err): ?>
+                            <li><?= esc($err) ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+
             <div class="mb-3">
                 <label class="form-label">Nama Produk / Layanan</label>
                 <input type="text" name="nama_produk" class="form-control" value="<?= old('nama_produk') ?>" required>
@@ -23,8 +33,8 @@
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Status</label>
                     <select name="status" class="form-select">
-                        <option value="Aktif">Aktif</option>
-                        <option value="Nonaktif">Nonaktif</option>
+                        <option value="Aktif" <?= old('status') === 'Aktif' ? 'selected' : '' ?>>Aktif</option>
+                        <option value="Nonaktif" <?= old('status') === 'Nonaktif' ? 'selected' : '' ?>>Nonaktif</option>
                     </select>
                 </div>
             </div>

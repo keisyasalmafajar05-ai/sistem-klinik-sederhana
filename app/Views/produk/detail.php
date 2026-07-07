@@ -7,7 +7,7 @@
     <div class="row g-4">
         <div class="col-12 col-md-5">
             <?php if (!empty($produk['gambar'])): ?>
-                <img src="<?= base_url('uploads/produk/' . $produk['gambar']) ?>" class="img-fluid rounded shadow-sm" alt="<?= esc($produk['nama_produk']) ?>">
+                <img src="<?= base_url('public/uploads/produk/' . $produk['gambar']) ?>" class="img-fluid rounded shadow-sm" alt="<?= esc($produk['nama_produk']) ?>">
             <?php else: ?>
                 <img src="https://via.placeholder.com/500x400?text=Klinik+Sehat" class="img-fluid rounded shadow-sm" alt="Tanpa gambar">
             <?php endif; ?>

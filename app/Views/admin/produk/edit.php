@@ -6,6 +6,16 @@
         <form action="<?= base_url('admin/produk/update/' . $produk['id']) ?>" method="post" enctype="multipart/form-data">
             <?= csrf_field() ?>
 
+            <?php if (session()->getFlashdata('errors')): ?>
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        <?php foreach (session()->getFlashdata('errors') as $err): ?>
+                            <li><?= esc($err) ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+
             <?php if (!empty($produk['gambar'])): ?>
                 <div class="mb-3">
                     <img src="<?= base_url('uploads/produk/' . $produk['gambar']) ?>" class="thumb-produk mb-2" style="width:100px;height:100px;">
@@ -30,8 +40,8 @@
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Status</label>
                     <select name="status" class="form-select">
-                        <option value="Aktif" <?= $produk['status'] === 'Aktif' ? 'selected' : '' ?>>Aktif</option>
-                        <option value="Nonaktif" <?= $produk['status'] === 'Nonaktif' ? 'selected' : '' ?>>Nonaktif</option>
+                        <option value="Aktif" <?= old('status', $produk['status']) === 'Aktif' ? 'selected' : '' ?>>Aktif</option>
+                        <option value="Nonaktif" <?= old('status', $produk['status']) === 'Nonaktif' ? 'selected' : '' ?>>Nonaktif</option>
                     </select>
                 </div>
             </div>

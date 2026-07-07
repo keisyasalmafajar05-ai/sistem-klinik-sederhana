@@ -39,9 +39,9 @@ $RECYCLE.BIN/
 #-------------------------
 # Environment Files
 #-------------------------
-# These should never be under version control,
-# as it poses a security risk.
 .env
+.env.*
+!.env.example
 .vagrant
 Vagrantfile
 
@@ -62,6 +62,9 @@ Vagrantfile
 
 /writable/debugbar/*
 !/writable/debugbar/index.html
+
+/public/uploads/*
+!/public/uploads/index.html
 
 php_errors.log
 

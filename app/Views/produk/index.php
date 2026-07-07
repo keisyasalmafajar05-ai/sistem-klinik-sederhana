@@ -38,8 +38,8 @@
             <div class="card border-0 shadow-sm rounded-4">
                 <div class="card-body">
                     <h5 class="fw-bold mb-3">Jam Pelayanan</h5>
-                    <p class="mb-2"><strong>Senin - Sabtu:</strong> 08.00 - 20.00</p>
-                    <p class="mb-0"><strong>Minggu:</strong> 09.00 - 14.00</p>
+                    <p class="mb-2"><strong>Senin - Sabtu:</strong> 15.00 - 23.00</p>
+                    <p class="mb-0"><strong>Minggu:</strong> 08.00 - 22.00</p>
                 </div>
             </div>
         </div>
@@ -59,7 +59,7 @@
             <div class="card h-100 border-0 shadow-sm rounded-4">
                 <div class="card-body text-center">
                     <i class="bi bi-clipboard2-pulse text-teal mb-3" style="font-size:2rem; color:#0d9488;"></i>
-                    <h5 class="fw-bold">Layanan Medis</h5>
+                    <h5 class="fw-bold">Layanan Suntik Pasien</h5>
                     <p class="text-muted mb-0">Pemeriksaan sederhana, konsultasi, dan pelayanan pendukung kesehatan yang nyaman.</p>
                 </div>
             </div>
@@ -82,8 +82,8 @@
                 <p class="text-muted mb-0">Untuk informasi obat, layanan, atau reservasi, silakan hubungi kami melalui kontak berikut.</p>
             </div>
             <div class="col-lg-4 text-lg-end">
-                <p class="mb-1"><i class="bi bi-telephone-fill me-2" style="color:#0d9488;"></i>0812-3456-7890</p>
-                <p class="mb-0"><i class="bi bi-geo-alt-fill me-2" style="color:#0d9488;"></i>Jl. Sehat No. 12, Kota Anda</p>
+                <p class="mb-1"><i class="bi bi-telephone-fill me-2" style="color:#0d9488;"></i>085770162427</p>
+                <p class="mb-0"><i class="bi bi-geo-alt-fill me-2" style="color:#0d9488;"></i>Jl. Btn KembangHarum 1</p>
             </div>
         </div>
     </div>
@@ -116,7 +116,7 @@
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
                     <div class="card card-produk h-100">
                         <?php if (!empty($item['gambar'])): ?>
-                            <img src="<?= base_url('uploads/produk/' . $item['gambar']) ?>" class="card-img-top" alt="<?= esc($item['nama_produk']) ?>">
+                            <img src="<?= base_url('public/uploads/produk/' . $item['gambar']) ?>" class="card-img-top" alt="<?= esc($item['nama_produk']) ?>">
                         <?php else: ?>
                             <img src="https://via.placeholder.com/400x300?text=Klinik+Sehat" class="card-img-top" alt="Tanpa gambar">
                         <?php endif; ?>
@@ -128,7 +128,11 @@
                             </p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <strong class="text-teal" style="color:#0d9488;">Rp <?= number_format((float) $item['harga'], 0, ',', '.') ?></strong>
-                                <a href="<?= base_url('produk/detail/' . $item['id']) ?>" class="btn btn-sm btn-outline-secondary">Detail</a>
+                                <?php if (!empty($item['id'])): ?>
+                                    <a href="<?= base_url('produk/detail/' . $item['id']) ?>" class="btn btn-sm btn-outline-secondary">Detail</a>
+                                <?php else: ?>
+                                    <a href="#kontak" class="btn btn-sm btn-outline-secondary">Hubungi</a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>

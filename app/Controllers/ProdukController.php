@@ -19,9 +19,43 @@ class ProdukController extends BaseController
         $keyword  = $this->request->getGet('keyword');
         $kategori = $this->request->getGet('kategori');
 
+        $produk = $this->produkModel->getProdukPublic($keyword, $kategori);
+
+        if (empty($produk)) {
+            $produk = [
+                [
+                    'id'         => null,
+                    'nama_produk'=> 'Cendera Lutut',
+                    'kategori'   => 'Layanan',
+                    'deskripsi'  => 'Penanganan cedera lutut dengan terapi dan perawatan medis untuk pemulihan optimal.',
+                    'harga'      => 0,
+                    'gambar'     => null,
+                    'status'     => 'Aktif',
+                ],
+                [
+                    'id'         => null,
+                    'nama_produk'=> 'Treatment Facet Block',
+                    'kategori'   => 'Layanan',
+                    'deskripsi'  => 'Perawatan facet block untuk meredakan nyeri punggung dan leher secara efektif.',
+                    'harga'      => 0,
+                    'gambar'     => null,
+                    'status'     => 'Aktif',
+                ],
+                [
+                    'id'         => null,
+                    'nama_produk'=> 'Terapi Rehabilitasi Lutut',
+                    'kategori'   => 'Layanan',
+                    'deskripsi'  => 'Program rehabilitasi untuk mempercepat pemulihan dan menguatkan sendi lutut.',
+                    'harga'      => 0,
+                    'gambar'     => null,
+                    'status'     => 'Aktif',
+                ],
+            ];
+        }
+
         $data = [
             'title'   => 'Produk & Layanan Klinik',
-            'produk'  => $this->produkModel->getProdukPublic($keyword, $kategori),
+            'produk'  => $produk,
             'keyword' => $keyword,
             'kategori' => $kategori,
         ];
